@@ -1,8 +1,101 @@
 <!DOCTYPE html>
 <html>
-<head><title>Zadanie GEO</title></head>
+<head>
+<meta charset="UTF-8">
+<title>Zadanie GEO</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/agate.css">
+
+</head>
 <body>
-<h1> Miejsca tweetujących w odległości 400 kilometrów od miasta Baltimore </h1>
-<script src="https://embed.github.com/view/geojson/kropeq/nosql/master/zapytania/query1.geojson"></script>
+<center><h2> Miejsca tweetujących w USA oraz liczba wysłanych tweetów </h2></center>
+<center><script src="https://embed.github.com/view/geojson/kropeq/nosql/master/tweets.geojson"></script></center>
+<br /><br />
+
+<center><h1> Zapytanie geo_distance </h1></center>
+<center><h3> Miejsca tweetujących w odległości 400 kilometrów od miasta Baltimore </h3></center>
+<div id="snippet">
+	<pre>
+	<code class="hljs json"> {
+	<span class="hljs-attribute">"query"</span> : { 
+		<span class="hljs-attribute">"bool"</span> : { 
+			<span class="hljs-attribute">"must"</span> : {
+				<span class="hljs-attribute">"match_all"</span> : {} 
+				},
+			<span class="hljs-attribute">"filter"</span> : { 
+				<span class="hljs-attribute">"geo_distance"</span> : { 
+					<span class="hljs-attribute">"distance"</span> : <span class="hljs-string">"400km"</span>, 
+					<span class="hljs-attribute">"Location"</span> : <span class="hljs-tag">[-76.6121900,39.2903800] </span>
+				}
+			}
+		}
+	}
+}
+</code>
+	</pre>
+</div>
+<center><script src="https://embed.github.com/view/geojson/kropeq/nosql/master/zapytania/query1.geojson"></script></center>
+<br /><br />
+
+<center><h1> Zapytanie geo_polygon </h1></center>
+<center><h3> Miejsca tweetujących w stanie Teksas </h3></center>
+<div id="snippet">
+	<pre>
+	<code class="hljs json"> {
+	<span class="hljs-attribute">"query"</span> : { 
+		<span class="hljs-attribute">"bool"</span> : { 
+			<span class="hljs-attribute">"must"</span> : {
+				<span class="hljs-attribute">"match_all"</span> : {} 
+				},
+			<span class="hljs-attribute">"filter"</span> : { 
+				<span class="hljs-attribute">"geo_polygon"</span> : {  
+					<span class="hljs-attribute">"Location"</span> : {
+						<span class="hljs-attribute">"points"</span> : [
+							<span class="hljs-tag">[-97.450601, 26.395055]</span>,
+							<span class="hljs-tag">[-106.600256, 31.972835]</span>,
+							<span class="hljs-tag">[-103.061962, 31.996343]</span>,
+							<span class="hljs-tag">[-103.034247, 36.499653]</span>,
+							<span class="hljs-tag">[-100.004064, 36.484799],</span>,
+							<span class="hljs-tag">[-99.967110, 34.567728]</span>,
+							<span class="hljs-tag">[-94.072946, 33.550980]</span>,
+							<span class="hljs-tag">[-93.858713, 29.693271]</span>
+						]
+					}
+				}
+			}
+		}
+	}
+}
+</code>
+	</pre>
+</div>
+<center><script src="https://embed.github.com/view/geojson/kropeq/nosql/master/zapytania/query2.geojson"></script></center>
+<br /><br />
+
+<center><h1> Zapytanie geo_bounding_box </h1></center>
+<center><h3> Miejsca tweetujących w północno-wschodniej części USA </h3></center>
+<div id="snippet">
+	<pre>
+	<code class="hljs json"> {
+	<span class="hljs-attribute">"query"</span> : { 
+		<span class="hljs-attribute">"bool"</span> : { 
+			<span class="hljs-attribute">"must"</span> : {
+				<span class="hljs-attribute">"match_all"</span> : {} 
+				},
+			<span class="hljs-attribute">"filter"</span> : { 
+				<span class="hljs-attribute">"geo_bounding_box"</span> : {  
+					<span class="hljs-attribute">"Location"</span> : {
+						<span class="hljs-attribute">"top_left"</span> : <span class="hljs-tag">[-97.450601, 26.395055]</span>,	
+						<span class="hljs-attribute">"bottom_right"</span> : <span class="hljs-tag">[-97.450601, 26.395055]</span>
+					}
+				}
+			}
+		}
+	}
+}
+</code>
+	</pre>
+</div>
+<center><script src="https://embed.github.com/view/geojson/kropeq/nosql/master/zapytania/query3.geojson"></script></center>
 </body>
 </html>
